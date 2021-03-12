@@ -1,0 +1,24 @@
+{
+  "name": "gameblockchain",
+  "version": "1.0.0",
+  "description": "A blockchain to play games like tic-tac-toe, chess, and diplomacy",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "babel-node": "babel-node --presets='@babel/preset-env'",
+    "start": "nodemon --exec npm run babel-node -- index.js"
+  },
+  "author": "Mark Solomonik",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "mongodb": "^3.6.4",
+    "node-rsa": "^1.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.10",
+    "@babel/node": "^7.13.10",
+    "@babel/preset-env": "^7.13.10",
+    "nodemon": "^2.0.7"
+  }
+}
