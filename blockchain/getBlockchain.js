@@ -31,11 +31,14 @@ export const getBlockchain = async () => {
             case 2:
               info = str;
               strCount = 0;
+              str = "";
               block = new Block(prevHash, timestamp, info);
               blockchain.blocks.push(block);
+              console.log("pushing block");
+              console.log(block);
               break;
           }
-        } else if (data[i] != "\n" || data[i-1] != "]") {
+        } else if (!(data[i] == "\n" && data[i-1] == "]")) {
           str += data[i];
         }
       }
