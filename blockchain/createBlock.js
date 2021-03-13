@@ -2,11 +2,12 @@ const crypto = require("crypto");
 import { Block } from "./Block";
 import { getBlockchain } from "./getBlockchain";
 
-export const createBlock = async (infoString) => {
+export const createBlock = async (info) => {
+  
   const blockchain = await getBlockchain();
+  
   const lastBlock = blockchain.blocks[blockchain.blocks.length - 1];
-  const blockchainString =
-    lastBlock.prevHash + lastBlock.timestamp + lastBlock.transactionInfo;
+  const blockchainString = lastBlock.createBlockString();
 
   const hash = crypto
     .createHash("sha256")
@@ -16,9 +17,8 @@ export const createBlock = async (infoString) => {
   const block = new Block(
     hash,
     Math.floor(new Date().getTime() / 1000),
-    infoString
+    info
   );
 //   console.log(block);
-
   return block;
 };

@@ -2,11 +2,12 @@ export class TransactionInfo {
   constructor(transactionType, parameterList) {
     this.transactionType = transactionType;
     this.parameterList = parameterList;
-    this.createInfoString();
+    this.infoString = this.createInfoString();
   }
 
   createInfoString() {
     let infoString = "";
+    infoString += this.transactionType;
     for (let i = 0; i < this.parameterList.length; i++) {
       if (infoString != "") {
         infoString += ",";
@@ -14,6 +15,6 @@ export class TransactionInfo {
       infoString += this.parameterList[i];
     }
 
-    this.infoString = infoString;
+    return infoString;
   }
 }

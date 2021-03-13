@@ -16,8 +16,9 @@ export const createCreateAccountInfo = async () => {
     });
   });
 
-//   console.log(publicKey);
-//   console.log(ip);
-  let info = new TransactionInfo("createAccount", [ip, publicKey]);
+  // console.log(publicKey);
+  // console.log(ip);
+  let info = new TransactionInfo("create_account", [ip, publicKey]);
+ 
   return info;
 };

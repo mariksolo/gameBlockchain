@@ -8,7 +8,7 @@
         // IP address
         // Public key
     // To verify
-        // IP and public key are unique
+        // public key is unique
     // Info format
         // [IP address],[public key]
 

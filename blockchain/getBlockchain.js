@@ -1,6 +1,8 @@
 import { readFile } from "fs";
 import { Block } from "./Block";
 import { Blockchain } from "./Blockchain";
+import { TransactionInfo } from "../transactions/TransactionInfo";
+import { parseInfoString } from "../transactions/parseInfoString";
 
 export const getBlockchain = async () => {
   const blockchain = new Promise((resolve, reject) => {
@@ -14,6 +16,7 @@ export const getBlockchain = async () => {
       let info;
       let strCount = 0;
       let blockchain = new Blockchain([]);
+      let infoObject;
 
       for (let i = 0; i < data.length; i++) {
         if (data[i] == "]") {
@@ -32,10 +35,11 @@ export const getBlockchain = async () => {
               info = str;
               strCount = 0;
               str = "";
-              block = new Block(prevHash, timestamp, info);
+              infoObject = parseInfoString(info);
+              block = new Block(prevHash, timestamp, infoObject);
               blockchain.blocks.push(block);
-              console.log("pushing block");
-              console.log(block);
+              // console.log("pushing block");
+              // console.log(block);
               break;
           }
         } else if (!(data[i] == "\n" && data[i-1] == "]")) {
