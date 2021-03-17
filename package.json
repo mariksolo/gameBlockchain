@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "babel-node": "babel-node --presets='@babel/preset-env'",
-    "start": "nodemon --exec npm run babel-node -- index.js",
-    "deploy": "babel-node index.js"
+    "start": "babel-node index.js",
+    "deploy": "nodemon --exec npm run babel-node -- index.js"
+    
+    
   },
   "author": "Mark Solomonik",
   "license": "ISC",
