@@ -17,7 +17,7 @@ export const verifyCreateAccountInfo = async (info) => {
   }
   let blockchain = await getBlockchain();
   for (let i = 0; i < blockchain.blocks.length; i++) {
-    console.log(blockchain.blocks[i]);
+    // console.log(blockchain.blocks[i]);
     if (blockchain.blocks[i].transactionInfo.parameterList[1] === info.parameterList[1]) {
       return false;
     }

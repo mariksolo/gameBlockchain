@@ -5,7 +5,7 @@ const crypto = require('crypto');
 export const verifyBlockHash = async (block) => {
   const blockchain = await getBlockchain();
   const lastBlock = blockchain.blocks[blockchain.blocks.length - 1];
-  const blockchainString = lastBlock.prevHash + lastBlock.timestamp + lastBlock.transactionInfo;
+  const blockchainString = lastBlock.createBlockString();
   const hash = crypto.createHash('sha256').update(blockchainString).digest('base64');
 
   if (hash == block.prevHash) {
