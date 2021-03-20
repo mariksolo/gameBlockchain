@@ -12,6 +12,7 @@ export const sendJson = async (data, port, url = "", ip = "") => {
       url: url,
       data: data,
     });
+    return response;
   } else if (ip !== "") {
     // TODO: Needs testing
     let response = await axios({
@@ -24,6 +25,7 @@ export const sendJson = async (data, port, url = "", ip = "") => {
         port: port,
       },
     });
+    return response;
   }
 
   //   console.log(response);
