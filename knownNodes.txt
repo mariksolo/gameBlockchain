@@ -1,4 +1,2 @@
-44.444.444.444]public key]
-44.444.444.444]public key]
-44.444.444.444]public key]
-44.444.444.444]public key]
+https://game-blockchain.herokuapp.com]public key]
+https://game-blockchain-test.herokuapp.com]public key]

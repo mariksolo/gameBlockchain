@@ -15,6 +15,7 @@ import { verifyCreateAccountInfo } from "./transactions/verifyInfo/verifyCreateA
 import { initializeNode } from "./init/initializeNode";
 // import { recieveBlock } from "./routes/recieveBlock";
 import { sendJson } from "./networking/sendJson";
+import { floodNetwork } from "./networking/floodNetwork";
 let recieveBlock = require("./networking/routes/recieveBlock");
 
 const app = express();
@@ -26,7 +27,9 @@ app.use(express.json());
 app.use("/blocks", recieveBlock);
 
 app.get("/", (req, res) => {
-  // sendJson("127.0.0.1", "VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]");
+  // sendJson("https://game-blockchain.herokuapp.com/blocks", "VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]");
+  // sendJson("VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]", 80, "https://game-blockchain.herokuapp.com/blocks");
+  floodNetwork({block: "VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]"}, "blocks");
   res.send("hi");
 })
 
