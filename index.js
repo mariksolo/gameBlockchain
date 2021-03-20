@@ -18,7 +18,7 @@ import { sendJson } from "./networking/sendJson";
 let recieveBlock = require("./networking/routes/recieveBlock");
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT || 3000;
 
 app.use(express.json());
 // app.use(bodyParser.urlencoded({ extended: true }));
