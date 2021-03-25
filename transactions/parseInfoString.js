@@ -4,7 +4,7 @@ export const parseInfoString = (infoString) => {
 //   console.log("parse Info String");
   let params = [];
   let str = "";
-  console.log(infoString);
+  // console.log(infoString);
   for (let i = 0; i < infoString.length; i++) {
     if (infoString[i] === ",") {
       params.push(str);

@@ -30,12 +30,18 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", (req, res) => {
-  // sendJson("https://game-blockchain.herokuapp.com/blocks", "VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]");
-  // sendJson("VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]", 80, "https://game-blockchain.herokuapp.com/blocks");
   // floodNetwork({block: "VHClQf4JVh2b37/YTLzLmv+P9u3P3F2fkYU+41pmb+8=]1615673714]random info,randomvar,randomvar2]"}, "blocks");
-  sendJson("", 80, "https://game-blockchain.herokuapp.com/blockchain").then((blockchain) => {
-    console.log(blockchain);
-  });
+  // sendJson("", 80, "https://game-blockchain-test.herokuapp.com/blockchain").then((blockchain) => {
+  //   console.log(blockchain.data);
+  // });
+  createCreateAccountInfo().then((accountInfo) => {
+    createBlock(accountInfo).then((block) => {
+      sendJson({block: block.createBlockString()}, 3000, "/blocks", "127.0.0.1").then((response) => {
+        console.log("done");
+      });
+    })
+  })
+  
   res.send("hi");
 })
 
