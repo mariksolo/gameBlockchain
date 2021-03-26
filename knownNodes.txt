@@ -1,2 +1,6 @@
 https://game-blockchain.herokuapp.com]public key]
 https://game-blockchain-test.herokuapp.com]public key]
+127.0.0.1]-----BEGIN RSA PUBLIC KEY-----
+MEgCQQCt+2RbmexfjKN4M2PY+KBE2gyn6mdzrW8ZSAL2qDTVn6dilul1C26j0iw/
+gMg9/jWA1pKDxhJcOiAAyZir0WAPAgMBAAE=
+-----END RSA PUBLIC KEY-----

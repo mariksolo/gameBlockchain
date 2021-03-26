@@ -1,6 +1,7 @@
 const express = require("express");
 const crypto = require("crypto");
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
+const inquirer = require("inquirer");
 
 import { verifyBlockHash } from "./blockchain/verifyBlockHash";
 import { createBlock } from "./blockchain/createBlock";
@@ -34,17 +35,45 @@ app.get("/", (req, res) => {
   // sendJson("", 80, "https://game-blockchain-test.herokuapp.com/blockchain").then((blockchain) => {
   //   console.log(blockchain.data);
   // });
-  createCreateAccountInfo().then((accountInfo) => {
-    createBlock(accountInfo).then((block) => {
-      sendJson({block: block.createBlockString()}, 3000, "/blocks", "127.0.0.1").then((response) => {
-        console.log("done");
-      });
-    })
-  })
-  
-  res.send("hi");
-})
+  // createCreateAccountInfo().then((accountInfo) => {
+  //   createBlock(accountInfo).then((block) => {
+  //     sendJson(
+  //       { block: block.createBlockString() },
+  //       3000,
+  //       "/blocks",
+  //       "127.0.0.1"
+  //     ).then((response) => {
+  //       console.log("done");
+  //     });
+  //   });
+  // });
 
+  res.send("hi");
+});
+
+inquirer
+  .prompt([
+    {
+      type: "confirm",
+      name: "initialize",
+      message: "Run init sequence?",
+      default: false,
+    },
+  ])
+  .then((answers) => {
+    if (answers.initialize) {
+      initializeNode();
+    }
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      // Prompt couldn't be rendered in the current environment
+      console.error(error);
+    } else {
+      // Something else went wrong
+      console.error(error);
+    }
+  });
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
 });
