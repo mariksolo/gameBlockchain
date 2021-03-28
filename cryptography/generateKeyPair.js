@@ -12,7 +12,10 @@ export const generateKeyPair = async () => {
     { modulusLength: 512 },
     async (err, publicKey, privateKey) => {
       let publicKeyString = publicKey.export({ format: "pem", type: "pkcs1" });
-      let privateKeyString = privateKey.export({ format: "pem", type: "pkcs1" });
+      let privateKeyString = privateKey.export({
+        format: "pem",
+        type: "pkcs1",
+      });
       await new Promise((resolve, reject) => {
         fs.writeFile(
           "publicKey.txt",

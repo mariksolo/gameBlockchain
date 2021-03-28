@@ -3,6 +3,7 @@ import { createCreateAccountInfo } from "../transactions/infoCreators/createCrea
 import { createBlock } from "../blockchain/createBlock";
 import { sendJson } from "../networking/sendJson";
 import { setBlockchain } from "../blockchain/setBlockchain";
+import { setKnownNodes } from "../networking/setKnownNodes";
 
 export const initializeNode = async () => {
   await generateKeyPair();
@@ -18,4 +19,5 @@ export const initializeNode = async () => {
   const blockchain = await sendJson({}, 3000, "/blockchain", "52.23.236.117");
   console.log(blockchain.data);
   setBlockchain(blockchain.data);
+  setKnownNodes(blockchain.data);
 };
