@@ -6,6 +6,6 @@ export const createSignature = (data, privateKey) => {
   const sign = crypto.createSign("RSA-SHA256");
   sign.update(data);
   sign.end();
-  const signature = sign.sign(privateKeyObject);
+  const signature = sign.sign(privateKeyObject, "hex");
   return signature;
 };

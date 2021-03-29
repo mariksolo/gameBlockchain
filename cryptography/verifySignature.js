@@ -5,5 +5,5 @@ export const verifySignature = (data, publicKey, signature) => {
   const verify = crypto.createVerify("RSA-SHA256");
   verify.update(data);
   verify.end();
-  return verify.verify(publicKey, signature);
+  return verify.verify(publicKey, signature, "hex");
 };
