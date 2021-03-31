@@ -7,15 +7,17 @@ export const verifyCreateAccountInfo = async (info) => {
   if (info.transactionType !== "create_account") {
     return false;
   }
+
+  if (info.parameterList.length !== 2) {
+    return false;
+  }
   // const knownNodes = await getKnownNodes();
   // for (let i = 0; i < knownNodes.length; i++) {
   //   if (knownNodes[i].key === info.parameterList[1]) {
   //     return false;
   //   }
   // }
-  if (info.parameterList.length !== 2) {
-    return false;
-  }
+
   console.log("verify 2");
   let blockchain = await getBlockchain();
   for (let i = 0; i < blockchain.blocks.length; i++) {

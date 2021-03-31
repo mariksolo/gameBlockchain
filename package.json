@@ -20,9 +20,11 @@
     "crypto": "^1.0.1",
     "express": "^4.17.1",
     "inquirer": "^8.0.0",
+    "inquirer-table-prompt": "^0.2.1",
     "mongodb": "^3.6.4",
     "node-rsa": "^1.1.1",
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.7",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {}
 }

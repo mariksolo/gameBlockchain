@@ -17,41 +17,45 @@
         // Type of game
         // Team of creating player (white, X's etc)
         // Creator of game IP + public key, proposed player IP + public key
-        // ID of game = creating player's signature of info
+        // ID of game (uuid)
+        // Signature
     // To verify:
         // Block signed by creator of game
     // Info format
-        // [game],[team],[IP address],[creator public key],[creator IP address],[proposed public key],[proposed IP address]
+        // [game],[team],[creator public key],[creator IP address],[proposed public key],[proposed IP address],[gameID],[signature]
 
 // Accept game
     // Parameters
         // Game ID
-        // Accepting player IP + public key
+        // Accepting player's signature = signature of gameID
     // To verify:
         // Game exists
         // Block signed by acceptor
     // Info format
-        // [game ID],[IP],[public key]
+        // [game ID],[signature]
 
 // Declare end
     // Parameters
         // Game ID
-        // Winner's IP and public key
+        // Winner's IP
     // To verify:
+        // Game exists
         // Game state is valid to end
+        // IP is in the game
     // Info format
-        // [game ID],[winner IP],[winner public key]
+        // [game ID],[winner IP]
 
 // Make move
     // Parameters
         // Move type (Place at 0,2. e2 to e4, etc)
-        // Acting player IP + public key
+        // Acting player IP
     // to verify:
+        // Game exists
+        // IP exists
         // Block signed by acting player
         // Move is valid
     // Move format (tic-tac-toe)
-        // 0,0 is at bottom left
-        // [row],[col].
+        // 0/0 is at bottom left
+        // [row]/[col].
     // Info format
-        // [move],[IP],[public key]
-
+        // [move],[IP],[gameID],[signature]
