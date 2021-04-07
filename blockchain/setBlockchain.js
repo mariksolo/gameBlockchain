@@ -7,7 +7,7 @@ export const setBlockchain = (blockchain) => {
     blockchainString += block.timestamp + "]";
     blockchainString += block.transactionInfo.infoString + "]\n";
   }
-  fs.writeFile("blockchain.txt", blockchainString, (err) => {
+  fs.writeFile("blockchain.txt", blockchainString.slice(0, blockchainString.length - 1), (err) => {
     if (err) throw err;
   });
 };
