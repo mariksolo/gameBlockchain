@@ -18,6 +18,11 @@ import { createMoveInfo } from "./transactions/infoCreators/createMoveInfo";
 import { verifyMoveInfo } from "./transactions/verifyInfo/verifyMoveInfo";
 import { createDeclareEndInfo } from "./transactions/infoCreators/createDeclareEndInfo";
 import { verifyDeclareEndInfo } from "./transactions/verifyInfo/verifyDeclareEndInfo";
+import { createGame } from "./networking/requests/createGame";
+import { acceptGame } from "./networking/requests/acceptGame";
+import { makeMove } from "./networking/requests/makeMove";
+import { declareEnd } from "./networking/requests/declareEnd";
+
 
 let recieveBlock = require("./networking/routes/recieveBlock");
 let queryBlockchain = require("./networking/routes/queryBlockchain");
@@ -174,15 +179,19 @@ inquirer
       if (answers.action === "create game") {
         const secondAnswers = await inquirer.prompt(createGameQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
+        await createGame(secondAnswers["opponentIP"], secondAnswers["starting team"]);
       } else if (answers.action === "accept game") {
         const secondAnswers = await inquirer.prompt(acceptGameQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
+        await acceptGame(secondAnswers["gameID"]);
       } else if (answers.action === "make move") {
         const secondAnswers = await inquirer.prompt(makeMoveQuestions);
         console.log(secondAnswers);
+        await makeMove(secondAnswers["gameID"], secondAnswers["placement"])
       } else if (answers.action === "declare end") {
         const secondAnswers = await inquirer.prompt(declareEndQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
+        await declareEnd(secondAnswers["gameID"], secondAnswers["winner"]);
       }
     }
   })

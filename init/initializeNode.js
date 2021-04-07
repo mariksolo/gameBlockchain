@@ -14,9 +14,9 @@ export const initializeNode = async () => {
     { block: block.createBlockString() },
     3000,
     "/blocks",
-    "52.23.236.117"
+    "3.95.161.139"
   );
-  const blockchain = await sendJson({}, 3000, "/blockchain", "52.23.236.117");
+  const blockchain = await sendJson({}, 3000, "/blockchain", "3.95.161.139");
   console.log(blockchain.data);
   setBlockchain(blockchain.data);
   setKnownNodes(blockchain.data);

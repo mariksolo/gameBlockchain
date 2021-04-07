@@ -3,9 +3,7 @@ import { Block } from "./Block";
 import { getBlockchain } from "./getBlockchain";
 
 export const createBlock = async (info) => {
-  
   const blockchain = await getBlockchain();
-  
   const lastBlock = blockchain.blocks[blockchain.blocks.length - 1];
   const blockchainString = lastBlock.createBlockString();
 
