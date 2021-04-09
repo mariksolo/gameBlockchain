@@ -69,6 +69,7 @@ app.get("/", async (req, res) => {
 
   // const result = await verifyDeclareEndInfo(block.transactionInfo);
   // console.log(result);
+  
 
   res.send("Hi");
 });
@@ -179,15 +180,18 @@ inquirer
       if (answers.action === "create game") {
         const secondAnswers = await inquirer.prompt(createGameQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
-        await createGame(secondAnswers["opponentIP"], secondAnswers["starting team"]);
+        console.log(secondAnswers["opponentIP"]);
+        console.log(secondAnswers["starting team"].slice(0, 1));
+        await createGame(secondAnswers["opponentIP"], secondAnswers["starting team"].slice(0, 1));
       } else if (answers.action === "accept game") {
         const secondAnswers = await inquirer.prompt(acceptGameQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
         await acceptGame(secondAnswers["gameID"]);
       } else if (answers.action === "make move") {
         const secondAnswers = await inquirer.prompt(makeMoveQuestions);
-        console.log(secondAnswers);
-        await makeMove(secondAnswers["gameID"], secondAnswers["placement"])
+        console.log("move");
+        console.log(secondAnswers["placement"].join("."));
+        await makeMove(secondAnswers["gameID"], secondAnswers["placement"].join("."));
       } else if (answers.action === "declare end") {
         const secondAnswers = await inquirer.prompt(declareEndQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));

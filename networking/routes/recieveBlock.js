@@ -43,9 +43,13 @@ router.post("/", async (req, res) => {
       res.send("Block has invalid transaction type");
       return;
   }
-
+  console.log(proposedBlock);
   if (verifiedInfo) {
     addBlock(proposedBlock);
+  } else {
+    console.log("Incorrect info");
+    res.send("Incorrect info");
+    return;
   }
 
   if (proposedBlock.transactionInfo.transactionType === "create_account") {
@@ -53,6 +57,7 @@ router.post("/", async (req, res) => {
   }
 
   res.send("Added block");
+  console.log("Added block");
 
   // const verifiedInfo = await verifyCreateAccountInfo(proposedBlock.transactionInfo);
   // res.send("hi");

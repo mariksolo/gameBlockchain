@@ -10,19 +10,30 @@ export const verifyStartGameInfo = async (info) => {
   // TODO add more checks for syntax of info (FOR ALL VERIFIERS)
 
   if (info.transactionType !== "create_game") {
+    console.log("transactionType is not create_game");
     return false;
   } else if (info.parameterList[0] !== "tic_tac_toe") {
+    console.log("Invalid game");
     return false;
   } else if (
     (info.parameterList[1] !== "X") &
     (info.parameterList[1] !== "O")
   ) {
+    console.log("Invalid team");
     return false;
   }
 
   const knownNodes = await getKnownNodes();
   let creatorIpMatchesKey = false;
+  console.log("knkownNodes");
+  console.log(knownNodes);
   for (let knownNode of knownNodes) {
+    // console.log("knownNode.ip");
+    // console.log(knownNode.ip);
+    // console.log(info.parameterList[3]);
+    // console.log("knownNode.key");
+    // console.log(knownNode.key);
+    // console.log(info.parameterList[2]);
     if (
       (knownNode.ip === info.parameterList[3]) &
       (knownNode.key === info.parameterList[2])
@@ -33,6 +44,7 @@ export const verifyStartGameInfo = async (info) => {
   }
 
   if (!creatorIpMatchesKey) {
+    console.log("The IP does not match the key");
     return false;
   }
 
@@ -48,6 +60,7 @@ export const verifyStartGameInfo = async (info) => {
   }
 
   if (!opponentIpMatchesKey) {
+    console.log("The opponent IP does not match the key");
     return false;
   }
 

@@ -5,15 +5,15 @@ import { sendJson } from "../sendJson";
 import { setKnownNodes } from "../setKnownNodes";
 
 export const makeMove = async (gameID, move) => {
-    const moveInfo = await createMoveInfo(gameID, move);
-    const block = await createBlock(moveInfo);
-    await sendJson(
-        { block: block.createBlockString() },
-        3000,
-        "/blocks",
-        "3.95.161.139"
-      );
-      const blockchain = await sendJson({}, 3000, "/blockchain", "3.95.161.139");
-      setBlockchain(blockchain.data);
-      
-}
+  const moveInfo = await createMoveInfo(gameID, move);
+  const block = await createBlock(moveInfo);
+  // await sendJson(
+  //   { block: block.createBlockString() },
+  //   3000,
+  //   "/blocks",
+  //   "127.0.0.1"
+  // );
+  await floodNetwork(block.createBlockString(), "blocks");
+  const blockchain = await sendJson({}, 3000, "/blockchain", "127.0.0.1");
+  setBlockchain(blockchain.data);
+};
