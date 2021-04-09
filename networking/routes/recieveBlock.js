@@ -18,6 +18,7 @@ router.post("/", async (req, res) => {
   const verifiedHash = await verifyBlockHash(proposedBlock);
   if (!verifiedHash) {
     res.send("Block rejected");
+    console.log("Block rejected");
     return;
   }
 
@@ -41,6 +42,7 @@ router.post("/", async (req, res) => {
       break;
     default:
       res.send("Block has invalid transaction type");
+      console.log("Block has invalid transaction type");
       return;
   }
   console.log(proposedBlock);

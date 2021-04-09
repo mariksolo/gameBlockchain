@@ -14,9 +14,9 @@ export const acceptGame = async (gameID) => {
   //   "/blocks",
   //   "127.0.0.1"
   // );
-  await floodNetwork(block.createBlockString(), "blocks");
+  await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
   
-  const blockchain = await sendJson({}, 3000, "/blockchain", "127.0.0.1");
+  const blockchain = await sendJson({}, 3000, "/blockchain", "54.144.196.153");
   // TODO ^^ replace things here with general consensus function/system
   setBlockchain(blockchain.data);
 };

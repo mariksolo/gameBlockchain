@@ -3,6 +3,7 @@ import { setBlockchain } from "../../blockchain/setBlockchain";
 import { createStartGameInfo } from "../../transactions/infoCreators/createStartGameInfo";
 import { sendJson } from "../sendJson";
 import { setKnownNodes } from "../setKnownNodes";
+import { floodNetwork } from "../floodNetwork";
 
 export const createGame = async (opponentIP, startingTeam) => {
   const startGameInfo = await createStartGameInfo(opponentIP, startingTeam);
@@ -13,7 +14,10 @@ export const createGame = async (opponentIP, startingTeam) => {
   //   "/blocks",
   //   "127.0.0.1"
   // );
-  await floodNetwork(block.createBlockString(), "blocks");
-  const blockchain = await sendJson({}, 3000, "/blockchain", "127.0.0.1");
+  console.log("createGame");
+  console.log(block);
+  console.log(block.createBlockString());
+  await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
+  const blockchain = await sendJson({}, 3000, "/blockchain", "54.144.196.153");
   setBlockchain(blockchain.data);
 };
