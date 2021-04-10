@@ -22,6 +22,8 @@ import { createGame } from "./networking/requests/createGame";
 import { acceptGame } from "./networking/requests/acceptGame";
 import { makeMove } from "./networking/requests/makeMove";
 import { declareEnd } from "./networking/requests/declareEnd";
+import { getBlockchain } from "./blockchain/getBlockchain";
+import { setKnownNodes } from "./networking/setKnownNodes";
 
 
 let recieveBlock = require("./networking/routes/recieveBlock");
@@ -37,38 +39,8 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
-  // createCreateAccountInfo().then((accountInfo) => {
-  //   createBlock(accountInfo).then((block) => {
-  //     sendJson(
-  //       { block: block.createBlockString() },
-  //       3000,
-  //       "/blocks",
-  //       "127.0.0.1"
-  //     ).then((response) => {
-  //       console.log("done");
-  //     });
-  //   });
-  // });
-  // const [publicKey, privateKey] = await getKeyPair();
-
-  // const info = await createStartGameInfo("52.23.236.117", "X");
-  // const block = await createBlock(info);
-  // await addBlock(block);
-
-  // const info2 = await createAcceptGameInfo(info.parameterList[6]);
-  // console.log(await verifyAcceptGameInfo(info2));
-
-  // const info = await createMoveInfo("dfb16c73-601f-4f08-843c-f59af043a2c7", "0.0");
-  // const block = await createBlock(info);
-
-  // const result = await verifyMoveInfo(block.transactionInfo);
-  // console.log(result);
-
-  // const info = await createDeclareEndInfo("dfb16c73-601f-4f08-843c-f59af043a2c7", "52.23.236.117");
-  // const block = await createBlock(info);
-
-  // const result = await verifyDeclareEndInfo(block.transactionInfo);
-  // console.log(result);
+  const blocks = await getBlockchain();
+  setKnownNodes(blocks);
   
 
   res.send("Hi");

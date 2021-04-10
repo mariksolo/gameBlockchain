@@ -6,7 +6,14 @@ import { setBlockchain } from "../blockchain/setBlockchain";
 import { setKnownNodes } from "../networking/setKnownNodes";
 
 export const initializeNode = async () => {
-  // TODO modify so the first thing it does is get the blockchain and set it, before generating a creat_account block
+  // TODO modify so that it automatically sets first 2 knowNodes. First one should be init node,
+  // second should be itself. Unless it is itself an init node, in which case there should only be one (itself).
+  // That way, it confirms everything against itself?
+
+  const blockchain = await sendJson({}, 3000, "/blockchain", "54.144.196.153");
+  setBlockchain(blockchain.data);
+  setKnownNodes(blockchain.data);
+  
   await generateKeyPair();
   const createAccountInfo = await createCreateAccountInfo();
   const block = await createBlock(createAccountInfo);
