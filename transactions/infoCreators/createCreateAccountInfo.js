@@ -8,6 +8,8 @@ export const createCreateAccountInfo = async () => {
       resolve(key);
     });
   });
+  console.log("createCreateAccountInfo");
+  console.log(publicKey);
 
   let ip = await new Promise((resolve, reject) => {
     readFile("IP.txt", "utf8", (err, key) => {

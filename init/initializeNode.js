@@ -12,12 +12,14 @@ export const initializeNode = async () => {
 
   console.log("regular init");
 
-  const blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
-  setBlockchain(blockchain.data);
-  setKnownNodes(blockchain.data);
+  let blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
+  await setBlockchain(blockchain.data);
+  // setKnownNodes(blockchain.data);
   
-  await generateKeyPair();
+  // TODO figure out this weird bug where it appears to set the key pair after this function runs
+  // await generateKeyPair();
   const createAccountInfo = await createCreateAccountInfo();
+  console.log(createAccountInfo);
   const block = await createBlock(createAccountInfo);
   console.log(block);
   await sendJson(
@@ -27,7 +29,7 @@ export const initializeNode = async () => {
     "54.89.182.190"
   );
   blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
-  console.log(blockchain.data);
+  // console.log(blockchain.data);
   setBlockchain(blockchain.data);
   setKnownNodes(blockchain.data);
 };

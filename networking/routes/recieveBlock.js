@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
   }
   console.log(proposedBlock);
   if (verifiedInfo) {
-    addBlock(proposedBlock);
+    await addBlock(proposedBlock);
   } else {
     console.log("Incorrect info");
     res.send("Incorrect info");
