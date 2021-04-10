@@ -10,9 +10,9 @@ export const floodNetwork = async (data, endpoint, ignore = "") => {
     if (node.ip === ignore) {
       console.log("skipping: " + ignore);
     } else if (node.ip.slice(0, 4) === "http") {
-      sendJson(data, 3000, node.ip + "/" + endpoint);
+      await sendJson(data, 3000, node.ip + "/" + endpoint);
     } else {
-      sendJson(data, 3000, "/" + endpoint, node.ip);
+      await sendJson(data, 3000, "/" + endpoint, node.ip);
     }
   }
 };

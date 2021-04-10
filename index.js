@@ -26,7 +26,6 @@ import { declareEnd } from "./networking/requests/declareEnd";
 import { getBlockchain } from "./blockchain/getBlockchain";
 import { setKnownNodes } from "./networking/setKnownNodes";
 
-
 let recieveBlock = require("./networking/routes/recieveBlock");
 let queryBlockchain = require("./networking/routes/queryBlockchain");
 
@@ -42,7 +41,6 @@ app.use("/blockchain", queryBlockchain);
 app.get("/", async (req, res) => {
   const blocks = await getBlockchain();
   setKnownNodes(blocks);
-  
 
   res.send("Hi");
 });
@@ -65,7 +63,13 @@ const actionQuestion = {
   type: "list",
   name: "action",
   message: "What would you like to do?",
-  choices: ["create game", "accept game", "make move", "declare end"],
+  choices: [
+    "create game",
+    "accept game",
+    "make move",
+    "declare end",
+    "query blockchain",
+  ],
 };
 
 const createGameQuestions = [
@@ -164,7 +168,10 @@ inquirer
         console.log(JSON.stringify(secondAnswers, null, "  "));
         console.log(secondAnswers["opponentIP"]);
         console.log(secondAnswers["starting team"].slice(0, 1));
-        await createGame(secondAnswers["opponentIP"], secondAnswers["starting team"].slice(0, 1));
+        await createGame(
+          secondAnswers["opponentIP"],
+          secondAnswers["starting team"].slice(0, 1)
+        );
       } else if (answers.action === "accept game") {
         const secondAnswers = await inquirer.prompt(acceptGameQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
@@ -173,11 +180,24 @@ inquirer
         const secondAnswers = await inquirer.prompt(makeMoveQuestions);
         console.log("move");
         console.log(secondAnswers["placement"].join("."));
-        await makeMove(secondAnswers["gameID"], secondAnswers["placement"].join("."));
+        await makeMove(
+          secondAnswers["gameID"],
+          secondAnswers["placement"].join(".")
+        );
       } else if (answers.action === "declare end") {
         const secondAnswers = await inquirer.prompt(declareEndQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
         await declareEnd(secondAnswers["gameID"], secondAnswers["winner"]);
+      } else if (answers.action === "query blockchain") {
+        const blockchain = await sendJson(
+          {},
+          3000,
+          "/blockchain",
+          "54.89.182.190"
+        );
+        // console.log(blockchain.data);
+        setBlockchain(blockchain.data);
+        setKnownNodes(blockchain.data);
       }
     }
   })
