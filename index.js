@@ -11,6 +11,7 @@ import { createStartGameInfo } from "./transactions/infoCreators/createStartGame
 import { addBlock } from "./blockchain/addBlock";
 import { createBlock } from "./blockchain/createBlock";
 import { initializeNode } from "./init/initializeNode";
+import { initializeInitNode } from "./init/initializeInitNode";
 import { verifyStartGameInfo } from "./transactions/verifyInfo/verifyStartGameInfo";
 import { createAcceptGameInfo } from "./transactions/infoCreators/createAcceptGameInfo";
 import { verifyAcceptGameInfo } from "./transactions/verifyInfo/verifyAcceptGameInfo";
@@ -50,6 +51,13 @@ const initQuestion = {
   type: "confirm",
   name: "initialize",
   message: "Run init sequence?",
+  default: false,
+};
+
+const initializeInitNodeQuestion = {
+  type: "confirm",
+  name: "initializeInitNode",
+  message: "Run init sequence for init nodes?",
   default: false,
 };
 
@@ -138,10 +146,12 @@ const declareEndQuestions = [
 inquirer.registerPrompt("table", inquirerTablePrompt);
 
 inquirer
-  .prompt([initQuestion])
+  .prompt([initQuestion, initializeInitNodeQuestion])
   .then(async (answers) => {
     if (answers.initialize) {
       initializeNode();
+    } else if (answers.initializeInitNode) {
+      initializeInitNode();
     }
     app.listen(port, () => {
       console.log(`Example app listening at http://localhost:${port}`);

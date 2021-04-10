@@ -10,6 +10,8 @@ export const initializeNode = async () => {
   // second should be itself. Unless it is itself an init node, in which case there should only be one (itself).
   // That way, it confirms everything against itself?
 
+  console.log("regular init");
+
   const blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
   setBlockchain(blockchain.data);
   setKnownNodes(blockchain.data);
@@ -24,7 +26,7 @@ export const initializeNode = async () => {
     "/blocks",
     "54.89.182.190"
   );
-  const blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
+  blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
   console.log(blockchain.data);
   setBlockchain(blockchain.data);
   setKnownNodes(blockchain.data);
