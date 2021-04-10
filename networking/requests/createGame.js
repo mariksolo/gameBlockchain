@@ -18,6 +18,6 @@ export const createGame = async (opponentIP, startingTeam) => {
   console.log(block);
   console.log(block.createBlockString());
   await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
-  const blockchain = await sendJson({}, 3000, "/blockchain", "54.144.196.153");
+  const blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
   setBlockchain(blockchain.data);
 };
