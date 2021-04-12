@@ -25,6 +25,9 @@ import { makeMove } from "./networking/requests/makeMove";
 import { declareEnd } from "./networking/requests/declareEnd";
 import { getBlockchain } from "./blockchain/getBlockchain";
 import { setKnownNodes } from "./networking/setKnownNodes";
+import { sendJson } from "./networking/sendJson";
+import { setBlockchain } from "./blockchain/setBlockchain";
+
 
 let recieveBlock = require("./networking/routes/recieveBlock");
 let queryBlockchain = require("./networking/routes/queryBlockchain");
@@ -195,6 +198,7 @@ inquirer
           "/blockchain",
           "54.89.182.190"
         );
+        
         // console.log(blockchain.data);
         setBlockchain(blockchain.data);
         setKnownNodes(blockchain.data);

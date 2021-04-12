@@ -4,8 +4,10 @@ import { createMoveInfo } from "../../transactions/infoCreators/createMoveInfo";
 import { sendJson } from "../sendJson";
 import { setKnownNodes } from "../setKnownNodes";
 import { floodNetwork } from "../floodNetwork";
+import { getInitNodeIP } from "../getInitNodeIP";
 
 export const makeMove = async (gameID, move) => {
+  const initNodeIP = await initNodeIP();
   const moveInfo = await createMoveInfo(gameID, move);
   const block = await createBlock(moveInfo);
   // await sendJson(
@@ -15,6 +17,6 @@ export const makeMove = async (gameID, move) => {
   //   "127.0.0.1"
   // );
   await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
-  const blockchain = await sendJson({}, 3000, "/blockchain", "54.89.182.190");
+  const blockchain = await sendJson({}, 3000, "/blockchain", initNodeIP);
   setBlockchain(blockchain.data);
 };
