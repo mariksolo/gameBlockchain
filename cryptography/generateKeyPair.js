@@ -7,38 +7,44 @@ export const generateKeyPair = async () => {
   // const publicKey = key.exportKey("pkcs8-public-pem");
   // const privateKey = key.exportKey("pkcs8-private-pem");
 
-  generate(
-    "rsa",
-    { modulusLength: 512 },
-    async (err, publicKey, privateKey) => {
-      let publicKeyString = publicKey.export({ format: "pem", type: "pkcs1" });
-      let privateKeyString = privateKey.export({
-        format: "pem",
-        type: "pkcs1",
-      });
-      await new Promise((resolve, reject) => {
-        fs.writeFile(
-          "publicKey.txt",
-          publicKeyString.slice(0, publicKeyString.length - 1),
-          (err) => {
-            if (err) throw err;
-            resolve();
-          }
-        );
-      });
+  return new Promise ((resolve, reject) => {
+    generate(
+      "rsa",
+      { modulusLength: 512 },
+      async (err, publicKey, privateKey) => {
+        let publicKeyString = publicKey.export({ format: "pem", type: "pkcs1" });
+        let privateKeyString = privateKey.export({
+          format: "pem",
+          type: "pkcs1",
+        });
+        await new Promise((resolve2, reject) => {
+          fs.writeFile(
+            "publicKey.txt",
+            publicKeyString.slice(0, publicKeyString.length - 1),
+            (err) => {
+              if (err) throw err;
+              resolve2();
+            }
+          );
+        });
+  
+        await new Promise((resolve2, reject) => {
+          fs.writeFile(
+            "privateKey.txt",
+            privateKeyString.slice(0, privateKeyString.length - 1),
+            (err) => {
+              if (err) throw err;
+              resolve2();
+            }
+          );
+        });
 
-      await new Promise((resolve, reject) => {
-        fs.writeFile(
-          "privateKey.txt",
-          privateKeyString.slice(0, privateKeyString.length - 1),
-          (err) => {
-            if (err) throw err;
-            resolve();
-          }
-        );
-      });
-    }
-  );
+        resolve();
+      }
+    );
+  });
+  
+  
 
-  return;
+  // return;
 };
