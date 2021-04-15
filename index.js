@@ -27,6 +27,9 @@ import { getBlockchain } from "./blockchain/getBlockchain";
 import { setKnownNodes } from "./networking/setKnownNodes";
 import { sendJson } from "./networking/sendJson";
 import { setBlockchain } from "./blockchain/setBlockchain";
+import { getInitNodeIP } from "./networking/getInitNodeIP";
+import { verifyBlockchain } from "./blockchain/verifyBlockchain";
+import { requestBlockchain } from "./networking/requests/requestBlockchain";
 
 
 let recieveBlock = require("./networking/routes/recieveBlock");
@@ -43,7 +46,7 @@ app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
   const blocks = await getBlockchain();
-  setKnownNodes(blocks);
+  console.log(await verifyBlockchain(blocks));
 
   res.send("Hi");
 });
@@ -192,15 +195,8 @@ inquirer
         console.log(JSON.stringify(secondAnswers, null, "  "));
         await declareEnd(secondAnswers["gameID"], secondAnswers["winner"]);
       } else if (answers.action === "query blockchain") {
-        const blockchain = await sendJson(
-          {},
-          3000,
-          "/blockchain",
-          "54.89.182.190"
-        );
-        
-        // console.log(blockchain.data);
-        setBlockchain(blockchain.data);
+        await requestBlockchain();
+        const blockchain = await getBlockchain();
         setKnownNodes(blockchain.data);
       }
     }

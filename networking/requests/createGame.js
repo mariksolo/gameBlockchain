@@ -5,6 +5,7 @@ import { sendJson } from "../sendJson";
 import { setKnownNodes } from "../setKnownNodes";
 import { floodNetwork } from "../floodNetwork";
 import { getInitNodeIP } from "../getInitNodeIP";
+import { requestBlockchain } from "./requestBlockchain";
 
 export const createGame = async (opponentIP, startingTeam) => {
   const initNodeIP = await initNodeIP();
@@ -20,6 +21,8 @@ export const createGame = async (opponentIP, startingTeam) => {
   console.log(block);
   console.log(block.createBlockString());
   await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
-  const blockchain = await sendJson({}, 3000, "/blockchain", initNodeIP);
-  setBlockchain(blockchain.data);
+  // const blockchain = await sendJson({}, 3000, "/blockchain", initNodeIP);
+  // setBlockchain(blockchain.data);
+  await requestBlockchain();
+  
 };
