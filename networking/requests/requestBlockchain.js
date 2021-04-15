@@ -1,6 +1,7 @@
 import { setBlockchain } from "../../blockchain/setBlockchain";
 import { verifyBlockchain } from "../../blockchain/verifyBlockchain";
 import { getKnownNodes } from "../getKnownNodes";
+import { sendJson } from "../sendJson";
 
 export const requestBlockchain = async (ignore = "") => {
   let chains = [];
