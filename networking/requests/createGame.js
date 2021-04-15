@@ -8,7 +8,7 @@ import { getInitNodeIP } from "../getInitNodeIP";
 import { requestBlockchain } from "./requestBlockchain";
 
 export const createGame = async (opponentIP, startingTeam) => {
-  const initNodeIP = await initNodeIP();
+  // const initNodeIP = await initNodeIP();
   const startGameInfo = await createStartGameInfo(opponentIP, startingTeam);
   const block = await createBlock(startGameInfo);
   // await sendJson(

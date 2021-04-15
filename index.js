@@ -197,7 +197,7 @@ inquirer
       } else if (answers.action === "query blockchain") {
         await requestBlockchain();
         const blockchain = await getBlockchain();
-        setKnownNodes(blockchain.data);
+        setKnownNodes(blockchain);
       }
     }
   })
