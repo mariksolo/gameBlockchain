@@ -45,5 +45,5 @@ export const verifyMoveInfo = async (info) => {
 
   if (!verifySignature(signatureString, publicKey, signature)) return false;
 
-  return await evaluateMove(block.transactionInfo.parameterList[2], block.transactionInfo.parameterList[1], block.transactionInfo.parameterList[0]);
+  return await evaluateMove(info.parameterList[2], info.parameterList[1], info.parameterList[0]);
 };
