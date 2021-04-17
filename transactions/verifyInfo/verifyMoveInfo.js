@@ -2,6 +2,7 @@ import { getBlockchain } from "../../blockchain/getBlockchain";
 import { verifySignature } from "../../cryptography/verifySignature";
 import { getKnownNodes } from "../../networking/getKnownNodes";
 import { TransactionInfo } from "../TransactionInfo";
+import { evaluateMove } from "../../games/ticTacToe/evaluateMove";
 
 export const verifyMoveInfo = async (info) => {
   // TODO add verification for actual rules of game
@@ -22,10 +23,9 @@ export const verifyMoveInfo = async (info) => {
   if (!gameFound) {
     return false;
   }
-  console.log("here");
 
   const knownNodes = await getKnownNodes();
-//   console.log(knownNodes);
+  //   console.log(knownNodes);
   let publicKey;
   let ipFound = false;
   for (let knownNode of knownNodes) {
@@ -38,8 +38,12 @@ export const verifyMoveInfo = async (info) => {
   if (!ipFound) {
     return false;
   }
-  
-  const signatureString = info.parameterList.slice(0, info.parameterList.length - 1).join(",");
 
-  return verifySignature(signatureString, publicKey, signature);
+  const signatureString = info.parameterList
+    .slice(0, info.parameterList.length - 1)
+    .join(",");
+
+  if (!verifySignature(signatureString, publicKey, signature)) return false;
+
+  return await evaluateMove(block.transactionInfo.parameterList[2], block.transactionInfo.parameterList[1], block.transactionInfo.parameterList[0]);
 };

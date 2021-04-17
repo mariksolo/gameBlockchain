@@ -186,12 +186,11 @@ inquirer
         await acceptGame(secondAnswers["gameID"]);
       } else if (answers.action === "make move") {
         const secondAnswers = await inquirer.prompt(makeMoveQuestions);
-        console.log("move");
-        console.log(secondAnswers["placement"].join("."));
-        // await makeMove(
-        //   secondAnswers["gameID"],
-        //   secondAnswers["placement"].join(".")
-        // );
+        
+        await makeMove(
+          secondAnswers["gameID"],
+          secondAnswers["placement"].join(".")
+        );
       } else if (answers.action === "declare end") {
         const secondAnswers = await inquirer.prompt(declareEndQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
