@@ -30,7 +30,8 @@ import { setBlockchain } from "./blockchain/setBlockchain";
 import { getInitNodeIP } from "./networking/getInitNodeIP";
 import { verifyBlockchain } from "./blockchain/verifyBlockchain";
 import { requestBlockchain } from "./networking/requests/requestBlockchain";
-
+import { getBoardState } from "./games/ticTacToe/getBoardState";
+import { evaluateMove } from "./games/ticTacToe/evaluateMove";
 
 let recieveBlock = require("./networking/routes/recieveBlock");
 let queryBlockchain = require("./networking/routes/queryBlockchain");
@@ -45,8 +46,9 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
-  const blocks = await getBlockchain();
-  console.log(await verifyBlockchain(blocks));
+  // const boardState = await getBoardState("60b7ee20-03cd-43ed-b42a-2e2e51ecb651");
+  // console.log(boardState);
+  console.log(await evaluateMove("60b7ee20-03cd-43ed-b42a-2e2e51ecb651", "127.0.0.1", "1.."))
 
   res.send("Hi");
 });
@@ -186,10 +188,10 @@ inquirer
         const secondAnswers = await inquirer.prompt(makeMoveQuestions);
         console.log("move");
         console.log(secondAnswers["placement"].join("."));
-        await makeMove(
-          secondAnswers["gameID"],
-          secondAnswers["placement"].join(".")
-        );
+        // await makeMove(
+        //   secondAnswers["gameID"],
+        //   secondAnswers["placement"].join(".")
+        // );
       } else if (answers.action === "declare end") {
         const secondAnswers = await inquirer.prompt(declareEndQuestions);
         console.log(JSON.stringify(secondAnswers, null, "  "));
