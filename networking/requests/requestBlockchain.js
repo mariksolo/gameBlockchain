@@ -51,10 +51,6 @@ export const requestBlockchain = async (ignore = "") => {
       console.log("Hashes are not valid");
     }
   }
-  console.log("Setting blockchain");
-  console.log(chains);
-  console.log(chains[longestChain]);
-  console.log(longestChain);
-  console.log(longestLength);
+
   await setBlockchain(chains[longestChain]);
 };

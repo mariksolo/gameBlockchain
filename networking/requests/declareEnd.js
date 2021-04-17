@@ -8,17 +8,12 @@ import { getInitNodeIP } from "../getInitNodeIP";
 import { requestBlockchain } from "./requestBlockchain";
 
 export const declareEnd = async (gameID, winner) => {
-  // const initNodeIP = await initNodeIP();
+  await requestBlockchain();
+
   const declareEndInfo = await createDeclareEndInfo(gameID, winner);
   const block = await createBlock(declareEndInfo);
-  // await sendJson(
-  //   { block: block.createBlockString() },
-  //   3000,
-  //   "/blocks",
-  //   "127.0.0.1"
-  // );
+ 
   await floodNetwork({ block: block.createBlockString() }, "blocks", "127.0.0.1");
-  // const blockchain = await sendJson({}, 3000, "/blockchain", initNodeIP);
-  // setBlockchain(blockchain.data);
+
   await requestBlockchain();
 };
