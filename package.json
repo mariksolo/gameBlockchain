@@ -1,7 +1,7 @@
 {
   "name": "gameblockchain",
-  "version": "1.0.0",
-  "description": "A blockchain to play games like tic-tac-toe, chess, and diplomacy",
+  "version": "0.1",
+  "description": "A client for a blockchain-based protocol to play games like tic-tac-toe.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,6 +11,7 @@
   },
   "author": "Mark Solomonik",
   "license": "ISC",
+  "homepage": "https://github.com/mariksolo/gameBlockchain",
   "dependencies": {
     "@babel/core": "^7.13.10",
     "@babel/node": "^7.13.10",
