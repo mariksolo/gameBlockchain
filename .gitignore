@@ -2,4 +2,4 @@ blockchain.txt
 IP.txt
 privateKey.txt
 publicKey.txt
-knownNodes.txt
+knownNodes.txt/node_modules
