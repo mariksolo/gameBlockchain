@@ -7,8 +7,6 @@ export const verifyStartGameInfo = async (info) => {
   // Signature matches public key
   // Game and starting team are valid
 
-  // TODO add more checks for syntax of info (FOR ALL VERIFIERS)
-
   if (info.transactionType !== "create_game") {
     console.log("transactionType is not create_game");
     return false;

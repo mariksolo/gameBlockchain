@@ -1,9 +1,8 @@
-export const identifyEnd = async (boardState) => {
-  const board = boardState[0];
+export const identifyEnd = async (board) => {
 
   let winner = null;
 
-  for (let i = 0; i < 2; i++) {
+  for (let i = 0; i < 3; i++) {
     if (
       board[i][0] !== "E" &&
       board[i][0] === board[i][1] &&

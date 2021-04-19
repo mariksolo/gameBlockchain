@@ -32,6 +32,7 @@ import { verifyBlockchain } from "./blockchain/verifyBlockchain";
 import { requestBlockchain } from "./networking/requests/requestBlockchain";
 import { getBoardState } from "./games/ticTacToe/getBoardState";
 import { evaluateMove } from "./games/ticTacToe/evaluateMove";
+import { identifyEnd } from "./games/ticTacToe/identifyEnd";
 
 let recieveBlock = require("./networking/routes/recieveBlock");
 let queryBlockchain = require("./networking/routes/queryBlockchain");
@@ -46,9 +47,14 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
-  const boardState = await getBoardState("60b7ee20-03cd-43ed-b42a-2e2e51ecb651");
-  // console.log(boardState);
-  console.log(await evaluateMove("60b7ee20-03cd-43ed-b42a-2e2e51ecb651", "127.0.0.1", "1..", boardState))
+  // const boardState = await getBoardState("7fa8795f-dbeb-4b0c-9e15-cbdaeb1b8bc2");
+  let board = [
+    ["O", "E", "O"],
+    ["X", "X", "E"],
+    ["O", "E", "X"],
+  ];
+  console.log(await identifyEnd(board));
+  // console.log(await evaluateMove("127.0.0.1", "2..", boardState))
 
   res.send("Hi");
 });

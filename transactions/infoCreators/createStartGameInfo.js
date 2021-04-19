@@ -28,7 +28,6 @@ export const createStartGameInfo = async (proposedOpponentIP, startingTeam) => {
   // It must include the name of the info type, although it will be
   // removed from the parameters later
 
-  // TODO get rid of create_game from info parameters to make consistent with other creators
   let infoParameters = ["create_game", "tic_tac_toe", startingTeam, publicKey, ip, proposedOpponentKey, proposedOpponentIP, uuid];
   const parameterSignatureString = infoParameters.join(",");
   const signature = createSignature(parameterSignatureString, privateKey);

@@ -1,7 +1,6 @@
 import { getBlockchain } from "./getBlockchain";
 const crypto = require('crypto');
 
-// TODO test this
 export const verifyBlockHash = async (block, blockchain = null) => {
   // const blockchain = await getBlockchain();
   if (blockchain === null) {

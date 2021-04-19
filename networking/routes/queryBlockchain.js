@@ -8,9 +8,6 @@ import { getBlockchain } from "../../blockchain/getBlockchain";
 
 router.post("/", async (req, res) => {
   console.log("blockchain request recieved");
-  // TODO - decide on accompaying data with request
-  // Does it need authentication, etc.
-  // Probably doesn't need anything
   const blockchain = await getBlockchain();
   res.send(blockchain);
 

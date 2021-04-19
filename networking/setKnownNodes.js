@@ -2,7 +2,6 @@ import { addKnownNode } from "./addKnownNode";
 import { KnownNode } from "./KnownNode";
 import { getKnownNodes } from "./getKnownNodes";
 
-// TODO make it avoid repeats
 export const setKnownNodes = async (blockchain) => {
   const knownNodes = await getKnownNodes();
 
