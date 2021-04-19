@@ -1,7 +1,7 @@
 import { getBoardState } from "./getBoardState";
 
-export const evaluateMove = async (gameID, playerIP, move) => {
-  let boardState = await getBoardState(gameID);
+export const evaluateMove = async (gameID, playerIP, move, boardState) => {
+  // let boardState = await getBoardState(gameID);
   if (boardState === []) return false;
 
   if (boardState[0] !== playerIP) return false;

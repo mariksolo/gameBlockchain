@@ -46,9 +46,9 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
-  // const boardState = await getBoardState("60b7ee20-03cd-43ed-b42a-2e2e51ecb651");
+  const boardState = await getBoardState("60b7ee20-03cd-43ed-b42a-2e2e51ecb651");
   // console.log(boardState);
-  console.log(await evaluateMove("60b7ee20-03cd-43ed-b42a-2e2e51ecb651", "127.0.0.1", "1.."))
+  console.log(await evaluateMove("60b7ee20-03cd-43ed-b42a-2e2e51ecb651", "127.0.0.1", "1..", boardState))
 
   res.send("Hi");
 });
