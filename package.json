@@ -1,6 +1,6 @@
 {
   "name": "gameblockchain",
-  "version": "0.1",
+  "version": "0.1.0",
   "description": "A client for a blockchain-based protocol to play games like tic-tac-toe.",
   "main": "index.js",
   "scripts": {
