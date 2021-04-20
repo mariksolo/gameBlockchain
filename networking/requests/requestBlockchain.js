@@ -4,6 +4,7 @@ import { setBlockchain } from "../../blockchain/setBlockchain";
 import { verifyBlockchain } from "../../blockchain/verifyBlockchain";
 import { parseInfoString } from "../../transactions/parseInfoString";
 import { getKnownNodes } from "../getKnownNodes";
+import { setKnownNodes } from "../setKnownNodes";
 import { sendJson } from "../sendJson";
 
 export const requestBlockchain = async (ignore = "") => {
@@ -53,4 +54,5 @@ export const requestBlockchain = async (ignore = "") => {
   }
 
   await setBlockchain(chains[longestChain]);
+  await setKnownNodes(chains[longestChain]);
 };
