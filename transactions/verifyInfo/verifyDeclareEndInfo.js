@@ -1,7 +1,8 @@
 import { getBlockchain } from "../../blockchain/getBlockchain";
+import { getBoardState } from "../../games/ticTacToe/getBoardState";
+import { identifyEnd } from "../../games/ticTacToe/identifyEnd";
 
 export const verifyDeclareEndInfo = async (info) => {
-  // TODO add check for actual rules of game
 
   if (info.transactionType !== "declare_end") {
     return false;
@@ -11,29 +12,44 @@ export const verifyDeclareEndInfo = async (info) => {
     return false;
   }
 
-  const blockchain = await getBlockchain();
-  let gameFound = false;
-  let starterIP;
-  let opponentIP;
-  for (let block of blockchain.blocks) {
-    if (block.transactionInfo.parameterList[6] === info.parameterList[0]) {
-      starterIP = block.transactionInfo.parameterList[3];
-      opponentIP = block.transactionInfo.parameterList[5];
-      gameFound = true;
-      break;
-    }
-  }
+  const boardState = await getBoardState(info.parameterList[0]);
+  if (boardState === []) return false;
 
-  if (!gameFound) {
+  const board = boardState[1];
+  const nextTurn = boardState[0];
+  const winner = await identifyEnd(board);
+  if (winner === null || winner !== nextTurn) {
     return false;
   }
 
-  if (
-    starterIP === info.parameterList[1] ||
-    opponentIP === info.parameterList[1]
-  ) {
-    return true;
-  } else {
-    return false;
-  }
+  return true;
+
+
+
+
+  // const blockchain = await getBlockchain();
+  // let gameFound = false;
+  // let starterIP;
+  // let opponentIP;
+  // for (let block of blockchain.blocks) {
+  //   if (block.transactionInfo.parameterList[6] === info.parameterList[0]) {
+  //     starterIP = block.transactionInfo.parameterList[3];
+  //     opponentIP = block.transactionInfo.parameterList[5];
+  //     gameFound = true;
+  //     break;
+  //   }
+  // }
+
+  // if (!gameFound) {
+  //   return false;
+  // }
+
+  // if (
+  //   starterIP === info.parameterList[1] ||
+  //   opponentIP === info.parameterList[1]
+  // ) {
+  //   return true;
+  // } else {
+  //   return false;
+  // }
 };
