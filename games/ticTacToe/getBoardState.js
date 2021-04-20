@@ -20,6 +20,7 @@ export const getBoardState = async (gameID) => {
       console.log("game found")
       gameFound = true;
       player1 = block.transactionInfo.parameterList[3];
+      nextTurn = player1;
       player1Role = block.transactionInfo.parameterList[1];
       player2 = block.transactionInfo.parameterList[5];
       if (player1Role === "X") {
