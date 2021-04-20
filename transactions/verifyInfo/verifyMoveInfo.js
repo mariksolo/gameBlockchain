@@ -28,7 +28,8 @@ export const verifyMoveInfo = async (info) => {
       if (
         !verifySignature(
           block.transactionInfo.parameterList[0],
-          opponentPublicKey
+          opponentPublicKey,
+          block.transactionInfo.parameterList[1]
         )
       ) {
         return false;
