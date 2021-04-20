@@ -18,7 +18,7 @@ export const verifyDeclareEndInfo = async (info) => {
   const board = boardState[1];
   const nextTurn = boardState[0];
   const winner = await identifyEnd(board);
-  if (winner === null || winner !== nextTurn) {
+  if (winner === null) {
     return false;
   }
 
