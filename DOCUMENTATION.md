@@ -1,24 +1,3 @@
-
-
-# Blockchain Structure
-> The blockchain is composed of a list of blocks in a .txt file, each separated by a newline character. Every block contains a single "transaction," which represents actions such as starting a game or making a move in a game. 
-
-> There are three parts of every block:
-- The hash of the previous block.
-- A timestamp (entirely decorative, is not used or verified).
-- Information associated with the transaction, such as details of a move and RSA public keys.
-
-> Every part is separated by a "]" like so:
-```sh
-Z8jS5xsftILJZCJGnNnBKPbz56t1NOVK4/WY8kKOAZU=]1618700286]create_account,54.224.157.143,-----BEGIN RSA PUBLIC KEY-----
-MEgCQQC/7kk6z31/Ily+bIPpxh5cCkPCF9GD+/mYxxSHj+OnFAJO3nhvjdC0eONl
-h3WqI5PCbkjHSH+bLZOgznuNgZ+hAgMBAAE=
------END RSA PUBLIC KEY-----]
-```
-> Blocks can contain newline characters within them, like above.
-
-&nbsp;
-
 # Local data to maintain
 
 <table>
@@ -102,3 +81,16 @@ h3WqI5PCbkjHSH+bLZOgznuNgZ+hAgMBAAE=
       </tr>
    </tbody>
 </table>
+
+# Lifecycle of Players and Games
+> Before playing a game, nodes must register themselves with the network with the create_account transaction. Currently, every node must be aware of every other node in the network.
+
+> Any node can start a game with any other node, as long as they know the other node's IP address and public RSA key. Once a game is started with the create_game transaction, the opponent must accept it with the accept_game transaction. The first turn belongs to the player who initiated the game. At that point, players take turns making move transactions. The game is finished and cannot be added to when any node (not limited to the players) calls the declare_end transaction.
+
+> Nodes must check the RSA signature included in accept_game and move transactions against their own recorded copy of that player's public key. They also must check the validity of move and declare_end transactions against that game's official rules.
+
+> This node only implements the game tic-tac-toe. As long as there is an agreed upon protocol for the "move" parameter of the move transaction, many other games can be played. For example, it would be possible to implement chess and diplomacy. 
+
+
+# Proof-of-work
+> Currently, the proof-of-work is kept trivial for testing. The hash must contain the sequence "aaa". The hash is of the entire previous block, with the nonce appended to the end. This client generates nonces by iterating an integer, but this is not required by the protocol.
