@@ -12,7 +12,7 @@ export const getBlockchain = async () => {
       let block;
       let str = "";
       let prevHash;
-      let timestamp;
+      let nonce;
       let info;
       let strCount = 0;
       let blockchain = new Blockchain([]);
@@ -27,7 +27,7 @@ export const getBlockchain = async () => {
               strCount++;
               break;
             case 1:
-              timestamp = str;
+              nonce = str;
               str = "";
               strCount++;
               break;
@@ -36,7 +36,7 @@ export const getBlockchain = async () => {
               strCount = 0;
               str = "";
               infoObject = parseInfoString(info);
-              block = new Block(prevHash, timestamp, infoObject);
+              block = new Block(prevHash, nonce, infoObject);
               blockchain.blocks.push(block);
               // console.log("pushing block");
               // console.log(block);

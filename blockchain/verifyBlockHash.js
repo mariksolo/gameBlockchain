@@ -8,9 +8,9 @@ export const verifyBlockHash = async (block, blockchain = null) => {
   }
   const lastBlock = blockchain.blocks[blockchain.blocks.length - 1];
   const blockchainString = lastBlock.createBlockString();
-  const hash = crypto.createHash('sha256').update(blockchainString).digest('base64');
+  const hash = crypto.createHash('sha256').update(blockchainString + block.nonce).digest('base64');
 
-  if (hash == block.prevHash) {
+  if (hash === block.prevHash && block.prevHash.includes("aaa")) {
       return true;
   } else {
       return false;

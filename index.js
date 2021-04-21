@@ -47,14 +47,15 @@ app.use("/blocks", recieveBlock);
 app.use("/blockchain", queryBlockchain);
 
 app.get("/", async (req, res) => {
-  // const boardState = await getBoardState("7fa8795f-dbeb-4b0c-9e15-cbdaeb1b8bc2");
-  let board = [
-    ["O", "E", "O"],
-    ["X", "X", "E"],
-    ["O", "E", "X"],
-  ];
-  console.log(await identifyEnd(board));
-  // console.log(await evaluateMove("127.0.0.1", "2..", boardState))
+  let info = await createStartGameInfo("54.162.7.224", "O");
+  let block = await createBlock(info);
+  console.log(block);
+  await sendJson(
+    { block: block.createBlockString() },
+    3000,
+    "/blocks",
+    "127.0.0.1"
+  );
 
   res.send("Hi");
 });

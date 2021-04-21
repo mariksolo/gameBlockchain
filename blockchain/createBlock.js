@@ -7,16 +7,23 @@ export const createBlock = async (info) => {
   const lastBlock = blockchain.blocks[blockchain.blocks.length - 1];
   const blockchainString = lastBlock.createBlockString();
 
-  const hash = crypto
+  let nonce = 0;
+  let hash = crypto
     .createHash("sha256")
-    .update(blockchainString)
+    .update(blockchainString + nonce)
     .digest("base64");
-//   console.log(Math.floor(new Date().getTime() / 1000));
-  const block = new Block(
-    hash,
-    Math.floor(new Date().getTime() / 1000),
-    info
-  );
-//   console.log(block);
+
+  while (!hash.includes("aaa")) {
+    nonce++;
+    hash = crypto
+      .createHash("sha256")
+      .update(blockchainString + nonce)
+      .digest("base64");
+    // console.log(nonce);
+    
+  }
+
+  const block = new Block(hash, nonce, info);
+    console.log(block);
   return block;
 };

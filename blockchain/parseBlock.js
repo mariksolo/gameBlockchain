@@ -4,7 +4,7 @@ import { Block } from "../blockchain/Block";
 
 export const parseBlock = (blockStr) => {
   let prevHash = "";
-  let timestamp = "";
+  let nonce = "";
   let infoStr = "";
 
   let i = 0;
@@ -25,7 +25,7 @@ export const parseBlock = (blockStr) => {
       i++;
       break;
     } else {
-      timestamp += blockStr[i];
+      nonce += blockStr[i];
     }
   }
 
@@ -39,6 +39,6 @@ export const parseBlock = (blockStr) => {
   }
 
   let transactionInfo = parseInfoString(infoStr);
-  let block = new Block(prevHash, timestamp, transactionInfo);
+  let block = new Block(prevHash, nonce, transactionInfo);
   return block;
 };

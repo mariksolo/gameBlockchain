@@ -19,6 +19,8 @@ router.post("/", async (req, res) => {
   if (!verifiedHash) {
     res.send("Block rejected");
     console.log("Block rejected");
+    console.log(verifiedHash);
+    console.log(proposedBlock);
     return;
   }
 

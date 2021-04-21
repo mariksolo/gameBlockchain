@@ -39,7 +39,7 @@ export const requestBlockchain = async (ignore = "") => {
       console.log("info String: ");
       console.log(infoString);
 
-      blockString = chains[i].blocks[j].prevHash + "]" + chains[i].blocks[j].timestamp + "]" + parseInfoString(infoString).createInfoString() + "]";
+      blockString = chains[i].blocks[j].prevHash + "]" + chains[i].blocks[j].nonce + "]" + parseInfoString(infoString).createInfoString() + "]";
       chains[i].blocks[j] = parseBlock(blockString);
     }
     if (await verifyBlockchain(chains[i])) {
