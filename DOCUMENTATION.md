@@ -34,7 +34,7 @@
 &nbsp;
 
 # Transaction Information Structure
-> A transaction is a list of items separated by commas, like so from the above example of a block:
+> A transaction is a list of items separated by commas, like so:
 ```sh
 create_account,54.224.157.143,-----BEGIN RSA PUBLIC KEY-----
 MEgCQQC/7kk6z31/Ily+bIPpxh5cCkPCF9GD+/mYxxSHj+OnFAJO3nhvjdC0eONl
@@ -83,13 +83,13 @@ h3WqI5PCbkjHSH+bLZOgznuNgZ+hAgMBAAE=
 </table>
 
 # Lifecycle of Players and Games
-> Before playing a game, nodes must register themselves with the network with the create_account transaction. Currently, every node must be aware of every other node in the network.
+> Before playing a game, nodes must register themselves with the network using the create_account transaction. Currently, every node must be aware of every other node in the network.
 
-> Any node can start a game with any other node, as long as they know the other node's IP address and public RSA key. Once a game is started with the create_game transaction, the opponent must accept it with the accept_game transaction. The first turn belongs to the player who initiated the game. At that point, players take turns making move transactions. The game is finished and cannot be added to when any node (not limited to the players) calls the declare_end transaction.
+> Any node can start a game with any other node, as long as they know the other node's IP address and public RSA key. Once a game is started with the create_game transaction, the opponent must accept it with the accept_game transaction. The first turn belongs to the player who initiated the game. At that point, players take turns making move transactions. The game is finished when any node (not limited to the players) calls the declare_end transaction.
 
 > Nodes must check the RSA signature included in accept_game and move transactions against their own recorded copy of that player's public key. They also must check the validity of move and declare_end transactions against that game's official rules.
 
-> This node only implements the game tic-tac-toe. As long as there is an agreed upon protocol for the "move" parameter of the move transaction, many other games can be played. For example, it would be possible to implement chess and diplomacy. 
+> This node only implements the game tic-tac-toe. As long as there is an agreed upon protocol for the "move" parameter of the move transaction, many other games can be played. For example, it would be possible to implement chess and checkers. 
 
 
 # Proof-of-work
