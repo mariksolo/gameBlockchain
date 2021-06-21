@@ -17,9 +17,9 @@
 
 
 ## Why?
-> A blockchain protocol like gameBlockchain may be used to preserve the authority of online chess tournaments. When online tournaments are held by a central authority, that authority may change moves and outcomes for its own benefit. If tournament participants instead used a blockchain client to play, it would be more difficult to rig or tamper with the results. 
+> A blockchain protocol like gameBlockchain may be used to preserve the authority of online chess tournaments. When online tournaments are held by a central authority, that authority may change moves and outcomes without oversight. If tournament participants instead used a blockchain client to play, it would be more difficult for a central authority to tamper with the results. 
 
-> The ultimate purpose of this project, however, was for me to learn about blockchains. There is no gameBlockchain network available for anyone to use, or any alternate clients. The current client implementation is also easy to trick into accepting invalid blocks, and the protocol itself likely has gaping security holes. The primary missing pieces of the blockchain are that the proof-of-work is too easy to produce, and the blockchain is installed in full on every node rather than distributed over the network. 
+> The ultimate purpose of this project, however, was for me to learn about blockchains. There is no gameBlockchain network available for anyone to use, or any alternate clients. The current client implementation is likely easy to trick into accepting invalid blocks, and the protocol itself likely has gaping security holes. The primary missing pieces of the blockchain are that the proof-of-work is too easy to produce, and the blockchain is installed in full on every node rather than distributed over the network. 
 
 &nbsp;
 
